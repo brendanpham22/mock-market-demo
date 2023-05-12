@@ -1,5 +1,6 @@
 package com.ascertain.mockdemo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Product {
+public class Product implements Serializable {
     @Id
     @SequenceGenerator(
             name= "product_id_sequence",
@@ -30,6 +32,7 @@ public class Product {
             strategy = GenerationType.SEQUENCE,
             generator = "product_id_sequence"
     )
+    @JsonIgnore
     private Integer id;
     private String name;
     private String code;

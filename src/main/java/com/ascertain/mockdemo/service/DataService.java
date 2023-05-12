@@ -1,6 +1,5 @@
 package com.ascertain.mockdemo.service;
 
-import com.ascertain.mockdemo.config.RabbitMQMessageProducer;
 import com.ascertain.mockdemo.entity.Product;
 import com.ascertain.mockdemo.repo.ProductRepo;
 import lombok.AllArgsConstructor;
@@ -37,10 +36,6 @@ public class DataService {
     }
 
     public void pushProductList(List<Product> products){
-        rabbitMQMessageProducer.publish(
-                products,
-                "internal.exchange",
-                "internal.notification.routing-key"
-        );
+        rabbitMQMessageProducer.publish(products);
     }
 }

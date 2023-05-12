@@ -9,6 +9,21 @@
       "code": "B",
       "name": "B",
       "price": 4.0
+    },
+    {
+      "code": "C",
+      "name": "B",
+      "price": 4.0
+    },
+    {
+      "code": "D",
+      "name": "B",
+      "price": 4.0
+    },
+    {
+      "code": "G",
+      "name": "T",
+      "price": 5.0
     }
   ]
 }
