@@ -54,4 +54,27 @@ public class Product implements Serializable {
         }
         return products;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+
+        Product product = (Product) o;
+
+        if (Double.compare(product.getPrice(), getPrice()) != 0) return false;
+        if (getName() != null ? !getName().equals(product.getName()) : product.getName() != null) return false;
+        return getCode() != null ? getCode().equals(product.getCode()) : product.getCode() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = getName() != null ? getName().hashCode() : 0;
+        result = 31 * result + (getCode() != null ? getCode().hashCode() : 0);
+        temp = Double.doubleToLongBits(getPrice());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }

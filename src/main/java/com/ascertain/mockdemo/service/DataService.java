@@ -32,7 +32,10 @@ public class DataService {
     }
 
     public void updateProductList(List<Product> products){
-        productRepo.saveAll(products);
+        List<Product> productList = productRepo.findAll();
+        List<Product> saveList = products;
+        saveList.removeAll(productList);
+        productRepo.saveAll(saveList);
     }
 
     public void pushProductList(List<Product> products){

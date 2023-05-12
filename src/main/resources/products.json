@@ -22,7 +22,12 @@
     },
     {
       "code": "G",
-      "name": "T",
+      "name": "D",
+      "price": 5.0
+    },
+    {
+      "code": "E",
+      "name": "D",
       "price": 5.0
     }
   ]
