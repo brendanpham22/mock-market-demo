@@ -1,0 +1,46 @@
+version: "3.7"
+services:
+  postgres:
+    container_name: postbeat-postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: arch
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: always
+    labels:
+      kompose.service.type: LoadBalancer
+  rabbitmq:
+    image: rabbitmq:3.9.29-management-alpine
+    container_name: rabbitmq-server
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - spring
+  product:
+    image: beatable2310/product:latest
+    container_name: customer-service
+    ports:
+      - "8080:8080"
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - postgres
+      - rabbitmq
+networks:
+  postgres:
+    driver: bridge
+  spring:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
