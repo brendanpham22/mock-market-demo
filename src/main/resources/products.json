@@ -4,6 +4,11 @@
       "code": "A",
       "name": "A",
       "price": 4.0
+    },
+    {
+      "code": "B",
+      "name": "B",
+      "price": 4.0
     }
   ]
 }
