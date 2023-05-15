@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/products")
 @AllArgsConstructor
 public class ProductController {
     private RabbitMQConsumer queueConsumer;
@@ -26,9 +29,12 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<?> getProducts() {
         List<Product> productList = queueConsumer.processMessage();
-        Map<String, List<Product>> map = new HashMap<>();
-        map.put("queue", productList);
-        map.put("db", productRepo.findAll());
-        return new ResponseEntity<>(map, HttpStatus.OK);
+        return new ResponseEntity<>(productList, HttpStatus.OK);
+    }
+
+    @MessageMapping("/products")
+    @SendTo("/topic/products")
+    public List<Product> broadcastProducts(@Payload String message) {
+        return queueConsumer.processMessage();
     }
 }

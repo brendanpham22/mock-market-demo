@@ -1,0 +1,24 @@
+{
+  "products": [
+    {
+      "code": "A",
+      "name": "Art",
+      "price": 5.0
+    },
+    {
+      "code": "B",
+      "name": "Bee",
+      "price": 4.0
+    },
+    {
+      "code": "D",
+      "name": "Cat",
+      "price": 5.0
+    },
+    {
+      "code": "H",
+      "name": "Goose",
+      "price": 5.0
+    }
+  ]
+}
